@@ -2,7 +2,15 @@
 # caatinga-ai-sprint1
 
 
-Projeto desenvolvido para a disciplina de Inteligência Artificial do Centro Universitário Rio Salgado (UniRios). O sistema simula a navegação autônoma e o diagnóstico preventivo de pragas em um pomar na região da Caatinga, utilizando técnicas de Busca em Grafos, Inferência Bayesiana e Sistemas Especialistas.
+## Sobre o Projeto
+
+Sistema desenvolvido para a disciplina de **Inteligência Artificial** do Centro Universitário Rio Salgado (UniRios).
+
+O **Caatinga.AI** simula a navegação autónoma e o diagnóstico preventivo de pragas num pomar na região da Caatinga, integrando:
+
+* **Busca em Grafos:** Navegação e otimização de rotas no terreno.
+* **Inferência Bayesiana:** Análise probabilística de presença de pragas.
+* **Sistemas Especialistas:** Tomada de decisão e recomendações de manejo.
 
 ```
 
