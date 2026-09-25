@@ -1,0 +1,7 @@
+estrategia,custo,passos,nos_expandidos,fronteira_max,tempo_ms
+BFS,61,22,118,12,0.25
+DFS,61,22,105,72,0.2
+UCS,43,22,119,17,0.27
+A* (h1=0),43,22,119,17,0.3
+A* (h2=Manhattan),43,22,112,24,0.29
+A* (h3=4xManhattan),49,22,24,21,0.08
