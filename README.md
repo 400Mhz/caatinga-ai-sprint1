@@ -205,3 +205,5 @@ Tomada de Decisão
 ```
 
 O projeto reúne conceitos de **busca em espaços de estados, busca local, probabilidade Bayesiana e sistemas especialistas** em uma única aplicação.
+
+> Versão 1.0 - Projeto Sprint 1
