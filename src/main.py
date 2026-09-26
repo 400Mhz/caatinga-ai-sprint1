@@ -1,3 +1,4 @@
+# Ponto de entrada do sistema Caatinga.AI
 import os
 import sys
 import time
