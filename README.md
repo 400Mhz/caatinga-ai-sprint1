@@ -1,110 +1,207 @@
-```markdown
-# caatinga-ai-sprint1
+# Caatinga.AI — Sprint 1
 
+Sistema desenvolvido para a disciplina de **Inteligência Artificial** do **Centro Universitário do Rio São Francisco (UniRios)**.
 
-## Sobre o Projeto
+O **Caatinga.AI** é um projeto acadêmico que simula a navegação autônoma e o diagnóstico preventivo de pragas em um pomar localizado na região da Caatinga. O sistema integra diferentes técnicas de Inteligência Artificial para realizar a navegação pelo ambiente, analisar informações de sensores e auxiliar na tomada de decisões.
 
-Sistema desenvolvido para a disciplina de ** Inteligência Artificial ** do Centro Universitário Rio Salgado (UniRios).
+As principais técnicas utilizadas são:
 
-O ** Caatinga.AI ** simula a navegação autónoma e o diagnóstico preventivo de pragas num pomar na região da Caatinga, integrando:
-
-* ** Busca em Grafos: ** Navegação e otimização de rotas no terreno.
-* ** Inferência Bayesiana: ** Análise probabilística de presença de pragas.
-* ** Sistemas Especialistas: ** Tomada de decisão e recomendações de manejo.
-
-```
+- **Busca em Grafos:** navegação pelo terreno e otimização de rotas.
+- **Inferência Bayesiana:** análise probabilística da presença de pragas.
+- **Sistema Especialista:** aplicação de regras para tomada de decisão e recomendações de manejo.
 
 ---
 
-## 👥 Integrantes da Equipe
+## Integrantes
 
-* ** Antônio M. Oliveira ** — Matrícula: `24114073`
-* ** Tony Carlos ** — Matrícula: `24114047`
-
----
-
-## 📌 Visão Geral do Projeto
-
-O ** Caatinga.AI ** é dividido em três pilares principais:
-
-1. ** Geração do Terreno e Sensores (`gerador_pomar.py`): **
-* Utiliza a matrícula do estudante como semente determinística (`seed`) para gerar uma grelha $12 \times 12$ representando o terreno do pomar.
-* Modela custos de movimentação: Solo Livre/Carreador (Custo 1), Solo Encharcado (Custo 4) e Obstáculos (Inacessível).
-* Fornece os parâmetros estocásticos do sensor para análise de pragas.
-
-
-2. ** Algoritmos de Busca e Navegação (`buscas.py` & `busca_local.py`): **
-* Determina a melhor rota entre a entrada `(0,0)` e o ponto de coleta `(11,11)`.
-* Avalia a eficiência de algoritmos de busca (ex.: Busca A*, Gulosa, Subida de Encosta / Hill Climbing).
-
-
-3. ** Diagnóstico Inteligente (`bayes.py` & `especialista.py`): **
-* ** Rede Bayesiana:** Calcula a probabilidade *a posteriori* de presença de praga com base na sensibilidade e especificidade do sensor.
-* ** Sistema Especialista: ** Aplica regras de inferência para recomendar ações de manejo agrícola sustentável.
-
-
+| Integrante | Matrícula |
+|---|---|
+| Antônio M. Oliveira | `24114073` |
+| Tony Carlos | `24114047` |
 
 ---
 
-## 📁 Estrutura do Repositório
+## Visão Geral
+
+O sistema é dividido em três componentes principais:
+
+### 1. Geração do Terreno e Sensores
+
+**Arquivo:** `src/gerador_pomar.py`
+
+Responsável pela criação do ambiente utilizado nas simulações.
+
+O módulo:
+
+- Utiliza a matrícula do estudante como `seed`, garantindo a reprodução do mesmo ambiente a partir da mesma entrada.
+- Gera uma grade de **12 × 12 posições**, representando o terreno do pomar.
+- Define diferentes tipos de terreno e seus respectivos custos de movimentação:
+  - **Solo livre / Carreador:** custo `1`;
+  - **Solo encharcado:** custo `4`;
+  - **Obstáculo:** posição inacessível.
+- Gera os parâmetros estocásticos utilizados pelo sensor de detecção de pragas.
+
+### 2. Algoritmos de Busca e Navegação
+
+**Arquivos:** `src/buscas.py` e `src/busca_local.py`
+
+Responsáveis pela navegação do agente pelo terreno e pela avaliação dos caminhos disponíveis.
+
+O ambiente possui como:
+
+- **Posição inicial:** `(0, 0)`
+- **Destino:** `(11, 11)`
+
+O projeto utiliza diferentes estratégias de busca para encontrar caminhos e comparar seus resultados, incluindo:
+
+- Busca A*;
+- Busca Gulosa;
+- Busca Local;
+- Subida de Encosta (*Hill Climbing*).
+
+Os algoritmos consideram os custos de movimentação e as posições classificadas como obstáculos.
+
+### 3. Diagnóstico Inteligente
+
+**Arquivos:** `src/bayes.py` e `src/especialista.py`
+
+Responsáveis pela análise probabilística e pela tomada de decisão relacionada à presença de pragas.
+
+#### Inferência Bayesiana
+
+O módulo `bayes.py` calcula a **probabilidade a posteriori** da presença de uma praga com base nas informações fornecidas pelo sensor.
+
+Entre os parâmetros considerados estão:
+
+- Probabilidade inicial da presença da praga;
+- Sensibilidade do sensor;
+- Especificidade do sensor;
+- Resultado da leitura realizada.
+
+#### Sistema Especialista
+
+O módulo `especialista.py` utiliza um conjunto de **regras de inferência** para interpretar os resultados obtidos e recomendar ações de manejo agrícola.
+
+---
+
+## Estrutura do Repositório
 
 ```text
 caatinga-ai-sprint1/
+│
 ├── src/
-│   ├── gerador_pomar.py   # Gerador determinístico da grelha e sensores
-│   ├── buscas.py          # Algoritmos de busca informada e não informada
-│   ├── busca_local.py    # Algoritmos de busca local
-│   ├── bayes.py          # Módulo de inferência bayesiana
-│   ├── especialista.py   # Sistema especialista baseado em regras
-│   └── main.py           # Script principal de execução
-├── resultados/            # Gráficos e mapas gerados das rotas
-├── .gitignore             # Arquivos ignorados pelo Git (__pycache__, etc.)
-└── README.md              # Documentação do projeto
-
+│   ├── gerador_pomar.py    # Geração determinística do terreno e sensores
+│   ├── buscas.py           # Algoritmos de busca informada e não informada
+│   ├── busca_local.py      # Algoritmos de busca local
+│   ├── bayes.py            # Módulo de inferência Bayesiana
+│   ├── especialista.py     # Sistema especialista baseado em regras
+│   └── main.py             # Ponto de entrada da aplicação
+│
+├── resultados/             # Mapas, gráficos e resultados das simulações
+│
+├── .gitignore              # Arquivos e diretórios ignorados pelo Git
+│
+└── README.md               # Documentação do projeto
 ```
 
 ---
 
-## 🚀 Como Executar o Projeto
+## Requisitos
 
-### Pré-requisitos
+Para executar o projeto, é necessário possuir:
 
-* Python 3.10 ou superior instalado.
-* Dependências necessárias (instalar via terminal):
+- **Python 3.10 ou superior**
+- **Matplotlib**
+- **Seaborn**
+
+As dependências podem ser instaladas com:
 
 ```bash
 pip install matplotlib seaborn
-
 ```
-
-### 1. Testar o Gerador de Pomar (Execução Independente)
-
-Para testar a geração da grelha $12 \times 12$ e os parâmetros do sensor para uma matrícula específica:
-
-```bash
-python src/gerador_pomar.py 24114047
-
-```
-
-### 2. Executar o Sistema Completo
-
-Para rodar a busca de caminhos, cálculo bayesiano e regras do sistema especialista com geração dos resultados gráficos:
-
-```bash
-python src/main.py 24114047
-
-```
-
-*Os mapas de rotas e gráficos gerados serão salvos automaticamente na pasta `resultados/`.*
 
 ---
 
-## 📊 Principais Resultados
+## Execução
 
-* ** Caminho Otimizado: ** A busca encontrou o trajeto de menor custo evitando zonas encharcadas e obstáculos.
-* ** Diagnóstico da Praga: ** A probabilidade *a posteriori* foi calculada com precisão com base nas leituras estocásticas do sensor.
-* ** Saídas Visuais: ** Os mapas do terreno e as rotas encontradas estão disponíveis na pasta `resultados/`.
+### Gerador de Pomar
 
+O gerador pode ser executado individualmente para gerar o terreno e os parâmetros do sensor a partir de uma matrícula.
+
+```bash
+python src/gerador_pomar.py 24114047
 ```
 
+A matrícula utilizada como argumento funciona como `seed` para a geração determinística do ambiente.
+
+### Sistema Completo
+
+Para executar todas as etapas do sistema:
+
+```bash
+python src/main.py 24114047
 ```
+
+O comando executa a geração do ambiente, os algoritmos de busca, a inferência Bayesiana e o sistema especialista.
+
+Para utilizar outra matrícula, basta substituir o valor utilizado como argumento:
+
+```bash
+python src/main.py <matricula>
+```
+
+Os mapas, gráficos e demais resultados visuais gerados durante a execução são armazenados automaticamente no diretório:
+
+```text
+resultados/
+```
+
+---
+
+## Resultados
+
+A execução do sistema permite analisar os resultados obtidos nas diferentes etapas do projeto.
+
+### Navegação
+
+Os algoritmos de busca determinam caminhos entre a posição inicial `(0, 0)` e o destino `(11, 11)`, considerando os custos de movimentação e os obstáculos presentes no terreno.
+
+### Diagnóstico
+
+A inferência Bayesiana utiliza os resultados dos sensores para calcular a probabilidade a posteriori da presença de uma praga.
+
+### Tomada de Decisão
+
+O sistema especialista utiliza regras previamente definidas para interpretar o diagnóstico e determinar recomendações de manejo.
+
+### Visualização
+
+Os mapas do terreno, as rotas encontradas e os demais gráficos produzidos pela aplicação ficam disponíveis no diretório:
+
+```text
+resultados/
+```
+
+---
+
+## Objetivo
+
+O **Caatinga.AI** tem como objetivo demonstrar a aplicação integrada de diferentes técnicas de Inteligência Artificial em um cenário de agricultura.
+
+O fluxo geral do sistema pode ser representado da seguinte forma:
+
+```text
+Geração do Ambiente
+        ↓
+Navegação e Busca
+        ↓
+Coleta de Informações
+        ↓
+Inferência Bayesiana
+        ↓
+Sistema Especialista
+        ↓
+Tomada de Decisão
+```
+
+O projeto reúne conceitos de **busca em espaços de estados, busca local, probabilidade Bayesiana e sistemas especialistas** em uma única aplicação.
